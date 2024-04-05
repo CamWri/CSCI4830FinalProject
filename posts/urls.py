@@ -21,4 +21,6 @@ urlpatterns = [
 
     #Account page where you can see your username, first name, last name, password, email, maybe all posts, etc
     #   In this page, if you can see all your posts(minimzed version)
+    #POsisble test urls in the future:
+
 ]

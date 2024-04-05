@@ -2,8 +2,6 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
 
-
-
 class Ticket(models.Model):
     user = models.ForeignKey(User, blank = True, null = True, on_delete = models.PROTECT)
     title = models.CharField("Title", max_length = 100)
@@ -19,7 +17,7 @@ class Ticket(models.Model):
 class Course(models.Model):
     course_name = models.CharField("Course", max_length = 75)
     all_tickets = models.ManyToManyField(Ticket, null = True, blank=True)
-    
+
     def __str__(self):
         return f" {self.course_name}"
     
