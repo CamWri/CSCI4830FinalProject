@@ -1,0 +1,48 @@
+{% extends "master.html" %}
+
+{% block title %}
+  User Details - {{ user.username }}
+{% endblock %}
+
+
+{% block content %}
+  <div class = "forum">
+    <h1>User {{ user.get_username }}</h1>
+ 
+    <p>Username {{ user.get_username }}</p>
+    <p>Email : {{ user.email }}</p>
+    <p>Staff : {{ user.is_staff }}</p>
+
+    <p>List of all users posts:</p>
+
+  <ul>
+    {% for ticket in tickets %}
+      <li>
+        User: {{ ticket.user }}
+        <br>
+        Post Time:{{ticket.time_of_post}}
+        <br>
+        Title: {{ ticket.title }}
+        <br>
+        Description: {{ ticket.post_description}}
+        <br>
+        {% if ticket.pdf_file %}
+          File: <a href="{{ ticket.pdf_file.url }}" download>{{ ticket.pdf_file.name }}</a>
+          <br>
+        {% endif %}
+        {% if ticket.video_file %}
+          <video width="560" height="315" controls>
+            <source src="{{ ticket.video_file.url }}" type="video/mp4">
+          </video>        
+          <br>
+        {% endif %}
+        {% if ticket.video_website_address %}
+            Video URL: <a href = "{{ticket.video_website_address}}">{{ticket.video_website_address}}</a>
+        {% endif %}
+
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

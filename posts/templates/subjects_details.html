@@ -1,0 +1,18 @@
+{% extends "master.html" %}
+
+{% block title %}
+  {{ subject.subject }} Courses
+{% endblock %}
+
+
+{% block content %}
+  <div class = "mycard"> 
+  <h1>{{ subject.subject }} Courses</h1>   
+  <ul>
+    {% for course in courses %}
+      <li><a href="{{ subject.subject}}/{{ course.course_name }}">{{ course.course_name }}</a></li>
+    {% endfor %}
+  </ul>
+    
+  </div>
+{% endblock %}
