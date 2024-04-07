@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Add Post
+{% endblock %}
+
+{% block content %}
+<div class="main">
+  <h1>Add Post To Database</h1>
+  <br/><br/><br/>
+
+
+  {% if submitted %}
+    Your Post was submitted successfully
+  {% endif %}
+  
+  {% if not submitted %}
+    <form action="" method="POST">
+
+      {% csrf_token %}
+
+      {{ form.as_p }}  <!-- Corrected template syntax -->
+
+      <input type="submit" value="Submit" class="btn btn-secondary custom-btn">
+
+    </form>
+
+  {% endif %}
+
+
+</div>
+  
+{% endblock %}
