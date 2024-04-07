@@ -5,7 +5,7 @@ from .models import Ticket
 class TicketForm(ModelForm):  # Corrected class name
     class Meta:
         model = Ticket
-        fields = ('title', 'time_of_post', 'post_description', 'video_website_address','pdf_file', 'video_file')
+        fields = ('title', 'time_of_post', 'post_description', 'video_website_address','pdf_file', 'video_file', 'ticket_course')
 
         labels = {
             'title': '',
@@ -13,7 +13,8 @@ class TicketForm(ModelForm):  # Corrected class name
             'post_description': '',
             'pdf_file': 'PDF File',
             'video_file': 'MP4 File',
-            'video_website_address': ''
+            'video_website_address': '',
+            'ticket_course': ''
         }
 
         widgets = {
@@ -23,6 +24,7 @@ class TicketForm(ModelForm):  # Corrected class name
             'video_website_address': forms.URLInput(attrs={'class': 'form-control', 'style': 'width: 600px; margin: auto', 'placeholder': 'Input Video URL'}),  # Example width: 200px
             'pdf_file': forms.FileInput(attrs={'class': 'form-control', 'style': 'width: 200px; margin: auto; border: none; display: inline;', 'placeholder': ''}),  # Example width: 200px
             'video_file': forms.FileInput(attrs={'class': 'form-control', 'style': 'width: 200px; margin: auto; border: none; display: inline;', 'placeholder': ''}),  # Example width: 200px
+            'ticket_course': forms.Select(attrs={'class': 'form-control', 'style': 'width: 200px; margin: auto;'})  # Use Select widget for ForeignKey field
         }
 
 

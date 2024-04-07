@@ -12,6 +12,7 @@ class Ticket(models.Model):
     pdf_file = models.FileField('PDF File', null = True, blank = True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc'])])
     video_file = models.FileField('Video File', null = True, blank = True, validators=[FileExtensionValidator(allowed_extensions=['mp4'])])
     video_website_address = models.URLField('Video Adress', null = True, blank = True)
+    ticket_course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey relationship with Course
 
     def __str__(self):
         return f"{self.user} {self.title} {self.post_description}"
