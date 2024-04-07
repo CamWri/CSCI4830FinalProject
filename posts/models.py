@@ -2,8 +2,10 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
 
+
 class Ticket(models.Model):
     user = models.ForeignKey(User, blank = True, null = True, on_delete = models.PROTECT)
+    username = models.CharField("Username", max_length = 100, blank = True, null = True)
     title = models.CharField("Title", max_length = 100)
     time_of_post = models.DateTimeField("Time of Post")
     post_description = models.CharField("Description", max_length = 500, null = True)

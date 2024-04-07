@@ -3,7 +3,11 @@ from django.template import loader
 from django.contrib.auth.models import User  # Corrected import
 from .models import CoreSubject, Course
 from django.shortcuts import render, get_object_or_404
-from .models import User, Ticket
+from .models import Ticket
+
+from django.http import HttpResponseRedirect
+
+from .forms import TicketForm;
 
 def users(request):
     myusers = User.objects.all().values() 
@@ -49,3 +53,28 @@ def courseDetails(request, subject, course_name):
 def main(request):
     template = loader.get_template('main.html')
     return HttpResponse(template.render())
+
+
+def account(request):
+    template = loader.get_template('account.html')
+    return HttpResponse(template.render())
+
+def add_post(request):  # Corrected function name and parameter
+    submitted = False
+    template = loader.get_template('add_post.html')
+
+    if request.method == "POST":
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_post?submitted=True')
+    else:
+        form = TicketForm()  # Corrected form instantiation
+        if 'submitted' in request.GET:
+            submitted = True
+
+    context = {
+        'form': form,
+        'submitted': submitted,
+    }
+    return HttpResponse(template.render(context, request))  # Pass context and request to render method

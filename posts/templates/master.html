@@ -3,40 +3,121 @@
 <html>
 <head>
   <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'myfirst.css' %}">
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Modify the background color */
+     
+    .navbar-custom {
+        background-color: #375BDC;
+        width: 100%;
+    }
+
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-text {
+      color: #ffffff;
+    }
+
+    .navbar-custom .navbar-toggler-icon {
+      background-color: #ffffff; /* Adjust the color of the toggler icon if needed */
+    }
+
+    .navbar-custom .form-inline .form-control {
+      color: #ffffff; /* Adjust the color of the input text if needed */
+    }
+
+    .navbar-custom .form-inline .btn{
+      color: #ffffff; /* Adjust the color of the button text if needed */
+      outline-color: #ffffff;
+    }
+    
+    .btn-outline-success:hover {
+        background-color: #4D70EF; /* Change background color on hover */
+        border-color: #4D70EF; /* Change border color on hover */
+    }
+
+    .btn-outline-success {
+        color: #ffffff; /* Button text color */
+        border-color: #ffffff; /* Button border color */
+    }
+
+
+    .navbar-custom .dropdown-item, .dropdown-menu{
+      background-color: #375BDC;
+    }
+
+    .navbar-custom a:visited, a:link {
+      color: #ffffff; 
+    }
+
+    .container{
+      width: 100%;
+    }
+
+    .custom-btn {
+      background-color: #375BDC; /* Change the background color */
+      border-color: #375BDC; /* Change the border color */
+      color: #ffffff; /* Change the text color */
+    }
+
+    .custom-btn:hover {
+      background-color: #4D70EF; /* Change the background color on hover */
+      border-color: #4D70EF; /* Change the border color on hover */
+      color: #ffffff; /* Change the text color on hover */
+    }
+
+</style>
 </head>
-
-<link rel="stylesheet" href="{% static 'myfirst.css' %}">
 <body>
-
-<nav class="topnav">
-  <div class="collapse navbar-collapse" id="navbar">
-      <!-- Need to redo this page to create better user experience when logged on and not logged on-->
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" id="home" href="/">Home</a>
-      |
-      <a class="nav-item nav-link" id="users" href="/users">Users</a>
-      |
-      <a class = "nav-item nav-link" id = "subjects" href = "/subjects">Subjects</a>
-      |
-      <a class="nav-item nav-link" id="account" href="/account">Account</a>
-      |
-      <a class="nav-item nav-link" id="search" href="/search">Search</a>
-      |
-      <a class="nav-item nav-link" id="upload" href="/upload">Upload</a>
-      |
-      <a class="nav-item nav-link" id="subjects" href="/logout">Logout</a>
-      |
-      <a class="nav-item nav-link" id="login" href="/login">Login</a>
-      |
-      <a class="nav-item nav-link" id="signup" href="/signup">Sign up</a>
-    </div>
-  </div>
-</nav>
-</div>
-
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="/" id = "home">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown"> <!-- Added 'dropdown' class -->
+          <a class="nav-link dropdown-toggle" href="/subjects" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subjects</a> <!-- Added 'dropdown-toggle' class and data-toggle attributes -->
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <!-- Added 'dropdown-menu' class -->
+            <a class="dropdown-item" href="/subjects">All Subjects</a>
+            <a class="dropdown-item" href="/subjects/subjectDetails/Math">Math</a>
+            <a class="dropdown-item" href="/subjects/subjectDetails/Science">Science</a>
+            <a class="dropdown-item" href="/subjects/subjectDetails/Reading">Reading</a>
+            <a class="dropdown-item" href="/subjects/subjectDetails/English">English</a>
+            <a class="dropdown-item" href="/subjects/subjectDetails/Social%20Studies">Social Studies</a>
+            <a class="dropdown-item" href="/subjects/subjectDetails/Foreign%20Language">Foreign Language</a>
+            <a class="dropdown-item" href="/subjects/subjectDetails/Computer%20Science">Computer Science</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/add_post">Add Post</a>
+        </li>
+        <li class="nav-item dropdown"> <!-- Added 'dropdown' class -->
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a> <!-- Added 'dropdown-toggle' class and data-toggle attributes -->
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <!-- Added 'dropdown-menu' class -->
+            <a class="dropdown-item" href="/accountdetails">Account Details</a>
+            <a class="dropdown-item" href="/login">Login</a>
+            <a class="dropdown-item" href="/logout">Log Out</a>
+            <a class="dropdown-item" href="/signup">Sign up</a>
+          </div>
+        </li>
+        </ul>
+        <!-- Search form -->
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+  </nav>
 
 {% block content %}
 {% endblock %}
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

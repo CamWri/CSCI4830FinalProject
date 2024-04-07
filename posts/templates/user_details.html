@@ -8,14 +8,13 @@
 {% block content %}
   <div class = "forum">
     <h1>User {{ user.get_username }}</h1>
- 
-    <p>Username {{ user.get_username }}</p>
-    <p>Email : {{ user.email }}</p>
-    <p>Staff : {{ user.is_staff }}</p>
-
-    <p>List of all users posts:</p>
 
   <ul>
+    <li>
+      <p>Username {{ user.get_username }}</p>
+      <p>Email : {{ user.email }}</p>
+      <p>Staff : {{ user.is_staff }}</p>
+    </li>
     {% for ticket in tickets %}
       <li>
         User: {{ ticket.user }}
