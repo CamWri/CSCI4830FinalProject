@@ -5,6 +5,8 @@ from .models import CoreSubject, Course
 from django.shortcuts import render, get_object_or_404
 from .models import Ticket
 
+from django.views.decorators.csrf import csrf_protect
+
 from django.http import HttpResponseRedirect
 
 from .forms import TicketForm;
@@ -89,3 +91,23 @@ def add_post(request):
         'submitted': submitted,
     }
     return render(request, template, context)
+
+
+@csrf_protect
+def search_tickets(request):
+    template_name = 'search_tickets.html'  # Name of the template file
+
+    if request.method == "POST":
+        search_query = request.POST.get('search_query', '')  # Safely get the search query
+
+        posts = Ticket.objects.filter(title__contains=search_query)
+
+        context = {
+            "search_query": search_query,
+            "posts" : posts,
+        }
+
+        return render(request, template_name, context)
+    else:
+        context = {}  # If it's not a POST request, create an empty context
+        return render(request, template_name, context)
