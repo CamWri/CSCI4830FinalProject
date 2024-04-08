@@ -4,14 +4,17 @@
   List of all users
 {% endblock %}
 
+<!--Will repurpose all of this-->
 
 {% block content %}
   <div class="mycard">
   <h1>Users</h1>
     <ul>
+      <div class = "bluetext">
       {% for x in myusers %}
-        <li onclick = "window.location = 'userDetails/{{ x.username }}'"><a href="userDetails/{{ x.id }}">{{ x.username }}</li>
+        <li onclick = "window.location = 'userDetails/{{ x.id }}'">{{ x.username }}</li>
       {% endfor %}
+      </div>
     </ul>
   </div>
 {% endblock %}
