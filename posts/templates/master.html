@@ -66,6 +66,37 @@
       border-color: #4D70EF; /* Change the border color on hover */
       color: #ffffff; /* Change the text color on hover */
     }
+    /*Style the submenu dropdown button */
+.dropbtn-submenu {
+  display: none; /* Initially hide the submenu */
+}
+.dropbtn-submenu {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+}
+
+/* Style the submenu dropdown content (default hidden) */
+.dropdown-content-submenu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-top: -16px;
+  margin-left: 190px; /* Align the submenu to the right */
+}
+
+/* Show the submenu dropdown content when the submenu dropdown button is hovered over */
+.dropdown-submenu:hover .dropdown-content-submenu {
+  display: block;
+}
+.dropdown-submenu:not(:hover) .dropdown-content-submenu {
+  display: none;
+}
 
     
     
@@ -85,18 +116,38 @@
           
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <!-- Added 'dropdown-menu' class -->
             <a class="dropdown-item" href="/subjects">All Subjects</a>
-            <div class="dropdown">
-             
-            
-            
            
             
-            
              
+            
           
            
-            <a class="dropdown-item" href="/subjects/subjectDetails/Math">Math</a>
+            
+            <div class="dropdown-submenu">
+              <a class="dropdown-item" href="/subjects/subjectDetails/Math">Math</a>
+              
+                <div class="dropdown-content-submenu">
+                  <a href="#">Submenu Link 1</a>
+                  <a href="#">Submenu Link 2</a>
+              
+            </div>
+            <div class="dropdown-submenu">
+              <a class="dropdown-item" href="/subjects/subjectDetails/Math">Math</a>
+              
+                <div class="dropdown-content-submenu">
+                  <a href="#">Submenu Link 1</a>
+                  <a href="#">Submenu Link 2</a>
+              
+            </div>
             <a class="dropdown-item" href="/subjects/subjectDetails/Science">Science</a>
+            <div class="dropdown-submenu">
+              <a class="dropdown-item" href="/subjects/subjectDetails/Math">Math</a>
+              
+                <div class="dropdown-content-submenu">
+                  <a href="#">Submenu Link 1</a>
+                  <a href="#">Submenu Link 2</a>
+              
+            </div>
             <a class="dropdown-item" href="/subjects/subjectDetails/Reading">Reading</a>
             <a class="dropdown-item" href="/subjects/subjectDetails/English">English</a>
             <a class="dropdown-item" href="/subjects/subjectDetails/Social%20Studies">Social Studies</a>
