@@ -1,4 +1,6 @@
 venv/
+.idea/
+*.pyc
 db.sqlite3
 posts/migrations
 SoftEngGroupProject/__pycache__
