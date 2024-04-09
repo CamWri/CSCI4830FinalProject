@@ -45,3 +45,5 @@ def register(request):
         form = RegisterForm()
 
     return render(request, "register.html", {"form": form})
+
+# branch created to merge with main
