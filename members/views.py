@@ -38,7 +38,8 @@ def register(request):
             #get the new user info
             user = User.objects.get(username=uname)
             user.save()
-            return redirect('/login')
+            login_url = reverse('login')
+            return redirect(login_url)
 
         return redirect("/")
     else:
