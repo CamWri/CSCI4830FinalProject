@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect
 from .forms import TicketForm
 
 def users(request):
-    myusers = User.objects.all().values() 
+    myusers = User.objects.all().values()
     template = loader.get_template('all_users.html')
     context = {
         'myusers': myusers,
@@ -119,3 +119,4 @@ def search_tickets(request):
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
+
