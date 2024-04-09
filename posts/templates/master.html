@@ -96,10 +96,12 @@
         <li class="nav-item dropdown"> <!-- Added 'dropdown' class -->
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a> <!-- Added 'dropdown-toggle' class and data-toggle attributes -->
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <!-- Added 'dropdown-menu' class -->
-            <a class="dropdown-item" href="/account">Account</a>
-            <a class="dropdown-item" href="/login">Login</a>
-            <a class="dropdown-item" href="/logout">Log Out</a>
-            <a class="dropdown-item" href="/signup">Sign up</a>
+
+            <a class="dropdown-item" href="/account">Account Details</a>
+            <a class="dropdown-item" href="/members/login">Login</a>
+            <a class="dropdown-item" href="/members/logout">Log Out</a>
+            <a class="dropdown-item" href="/members/register">Sign up</a>
+
           </div>
         </li>
         </ul>
@@ -110,7 +112,13 @@
         {% endblock %}
       </div>
   </nav>
-
+  <div class="container">
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+    </div>
 {% block content %}
 {% endblock %}
 
