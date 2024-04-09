@@ -1,0 +1,70 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Account Information
+{% endblock %}
+
+{% block content %}
+<style>
+  /* Padding Above Container */
+  .container {
+    padding-top: 20px;
+  }
+  /* Account Information */
+  .account-info {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  /* Account Header */
+  .account-info-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom: 10px;
+  }
+  /* Account to Button */
+  .account-info-details {
+    margin-bottom: 10px;
+  }
+  /* Delete Account Button */
+  .delete-account-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+</style>
+
+<div class="container">
+  <div class="account-info">
+    <div class="account-info-header">
+      <h2>Account Information</h2>
+    </div>
+    <div class="account-info-details">
+      <p><strong>User:</strong> {{user.username}}</p>
+      <p><strong>Email:</strong> {{user.email }}</p>
+    </div>
+
+    <form method="post" action="{% url 'delete_account' %}">
+      {% csrf_token %}
+      <button type="submit" class="delete-account-btn">Delete Account</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
