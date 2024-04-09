@@ -27,7 +27,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, "You were logged out.")
-    return render(request, 'main.html', {'message' : "You were logged out."})
+    return render(request, 'logout.html', {'message' : "You were logged out."})
 
 def register(request):
     if request.method == "POST":
