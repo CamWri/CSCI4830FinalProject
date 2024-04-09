@@ -23,6 +23,10 @@
     border-top-right-radius: 5px;
     margin: -1px -1px 20px;
   }
+  /* Ticket Title Anchor */
+  .ticket-title a {
+    color: white;
+  }
   /* Ticket Details */
   .ticket-details{
     margin-left: 10px;
@@ -33,7 +37,7 @@
   <div class="card">
     <div class="card-body">
       <h1 class="text-center">Welcome to the Educational Hub!</h1>
-      <p class="lead text-center">Explore educational resources in a safe and distraction free environment.</p>
+      <p class="lead text-center">Explore educational resources in a safe and distraction-free environment.</p>
 
     </div>
   </div>
@@ -43,7 +47,9 @@
   {% for ticket in ticketlist %}
   <div class="ticket-item">
     <div class="ticket-title">
-      <h3>{{ ticket.title }}</h3>
+      <a href="{% url 'ticket' ticket_id=ticket.id%}">
+        <h3>{{ ticket.title }}</h3>
+      </a>
     </div>
     <div class="ticket-details">
       <p>User: {{ ticket.user }}</p>
@@ -67,7 +73,6 @@
   {% endfor %}
 </div>
 {% endblock %}
-
 
 
 

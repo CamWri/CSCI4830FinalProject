@@ -126,3 +126,16 @@ def search_tickets(request):
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
 
+
+def ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    course_name = ticket.ticket_course
+    context = {
+        'ticket': ticket,
+        'course_name': course_name,
+    }
+    return render(request, 'ticket.html', context)
+
+
+
+
