@@ -3,16 +3,20 @@ from django.template import loader
 from django.contrib.auth.models import User  # Corrected import
 from .models import CoreSubject, Course
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 from .models import Ticket
+import random
+
 
 from django.views.decorators.csrf import csrf_protect
 
 from django.http import HttpResponseRedirect
 
-from .forms import TicketForm;
+from .forms import TicketForm
 
 def users(request):
-    myusers = User.objects.all().values() 
+    myusers = User.objects.all().values()
     template = loader.get_template('all_users.html')
     context = {
         'myusers': myusers,
@@ -53,13 +57,23 @@ def courseDetails(request, subject, course_name):
     return HttpResponse(template.render(context, request))
 
 def main(request):
+    ticketlist = Ticket.objects.all()
+    random_tickets = random.sample(list(ticketlist), min(len(ticketlist), 5)) # Select up to 5 random tickets
+    mysubjects = CoreSubject.objects.all().values()
     template = loader.get_template('main.html')
-    return HttpResponse(template.render())
+    context = {
+        'mysubjects': mysubjects,
+        'ticketlist': random_tickets,
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def account(request):
     template = loader.get_template('account.html')
     return HttpResponse(template.render())
+
+def delete_account(request):
+    return render('account')
 
 def add_post(request):
     submitted = False
@@ -111,3 +125,4 @@ def search_tickets(request):
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
+

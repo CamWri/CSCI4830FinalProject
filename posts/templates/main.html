@@ -4,21 +4,92 @@
   Educational Hub
 {% endblock %}
 
-
 {% block content %}
-<div class = "main">
-  <h1>  Educational Hub</h1>
 
-  <div class="container">
+<style>
+  /* Button Text color*/
+  .btn-white-text {
+    color: white;
+  }
+  /* Bottom Margin for Column */
+  .mb-4-no {
+    margin-bottom: 200px;
+  }
+  /* Button Height */
+  .btn-taller {
+    height: 40px;
+  }
+  /* Button Text Size */
+  .btn-text-bigger {
+    font-size: 20px;
+  }
+  /* Button Bold */
+  .btn-bold {
+    font-weight: bold;
+  }
+  /* Column Padding */
+  .pl-0 {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+  /* Ticket Display */
+  .ticket-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 0;
+    border-radius: 5px;
+  }
+  /* Ticket title */
+  .ticket-title {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: -1px -1px 20px;
+  }
+</style>
 
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="text-center">Welcome to the Educational Hub!</h1>
+      <p class="lead text-center">Explore educational resources in a safe and distraction free environment.</p>
 
-    <p>Welcome, <strong>{{ user.username }}</strong>!</p>
-
+    </div>
   </div>
 
-  <br/>
-  <p>Check out all our <a href="users/">users</a></p>
+  <h2 class="text-center mt-5">Discover</h2>
 
+  {% for ticket in ticketlist %}
+  <div class="ticket-item">
+    <div class="ticket-title">
+      <h3>{{ ticket.title }}</h3>
+    </div>
+    <div class="ticket-details">
+      <p>User: {{ ticket.user }}</p>
+      <p>Subject: {{ ticket.ticket_course }}</p>
+      <p>Post Time: {{ ticket.time_of_post }}</p>
+      <p>Description: {{ ticket.post_description }}</p>
+      {% if ticket.pdf_file %}
+      <p>File: <a href="{{ ticket.pdf_file.url }}" download>{{ ticket.pdf_file.name }}</a></p>
+      {% endif %}
+      {% if ticket.video_file %}
+      <video width="560" height="315" controls>
+        <source src="{{ ticket.video_file.url }}" type="video/mp4">
+      </video>
+      <br>
+      {% endif %}
+      {% if ticket.video_website_address %}
+      <p>Video URL: <a href="{{ ticket.video_website_address }}">{{ ticket.video_website_address }}</a></p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
 </div>
-  
 {% endblock %}
+
+
+
+
