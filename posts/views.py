@@ -3,8 +3,11 @@ from django.template import loader
 from django.contrib.auth.models import User  # Corrected import
 from .models import CoreSubject, Course
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 from .models import Ticket
 import random
+
 
 from django.views.decorators.csrf import csrf_protect
 
@@ -68,6 +71,9 @@ def main(request):
 def account(request):
     template = loader.get_template('account.html')
     return HttpResponse(template.render())
+
+def delete_account(request):
+    return render('account')
 
 def add_post(request):
     submitted = False
