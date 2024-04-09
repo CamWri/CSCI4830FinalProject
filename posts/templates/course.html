@@ -14,9 +14,9 @@
 
 
 {% block content %}
-  <div class = "forum"> 
-  <h1>{{ course.course_name }} Forum</h1>   
-  
+  <div class = "forum">
+  <h1>{{ course.course_name }} Forum</h1>
+
   <ul>
     {% for ticket in ticket_list %}
       <li>
@@ -35,7 +35,7 @@
         {% if ticket.video_file %}
           <video width="560" height="315" controls>
             <source src="{{ ticket.video_file.url }}" type="video/mp4">
-          </video>        
+          </video>
           <br>
         {% endif %}
         {% if ticket.video_website_address %}
@@ -45,6 +45,6 @@
       </li>
     {% endfor %}
   </ul>
-    
+
   </div>
 {% endblock %}

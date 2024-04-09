@@ -4,49 +4,49 @@
   Ticket Search
 {% endblock %}
 
+{% block search %}
+<form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'search_tickets' %}">
+  {% csrf_token %}
+  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_query" style="color: #375BDC;">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+{% endblock %}
 
 {% block content %}
-<div class = "forum">
+<div class="forum">
 
   {% if search_query %}
-
-      <h1>  You Searched for  {{ search_query }}</h1>
-
-      <ul>
-        {% for post in posts %}
-          <li>
-            User: {{ post.user }}
+    <h1>You Searched for {{ search_query }}</h1>
+    <ul>
+      {% for post in posts %}
+        <li>
+          <a href="{% url 'ticket' ticket_id=post.id%}">
+          User: {{ post.user }} <br>
+          Post Time:{{ post.time_of_post }} <br>
+          Title: {{ post.title }} <br>
+          Description: {{ post.post_description }} <br>
+          {% if post.pdf_file %}
+            File: <a href="{{ post.pdf_file.url }}" download>{{ post.pdf_file.name }}</a><br>
+          {% endif %}
+          {% if post.video_file %}
+            <video width="560" height="315" controls>
+              <source src="{{ post.video_file.url }}" type="video/mp4">
+            </video>
             <br>
-            Post Time:{{post.time_of_post}}
-            <br>
-            Title: {{ post.title }}
-            <br>
-            Description: {{ post.post_description}}
-            <br>
-            {% if post.pdf_file %}
-              File: <a href="{{ post.pdf_file.url }}" download>{{ post.pdf_file.name }}</a>
-              <br>
-            {% endif %}
-            {% if post.video_file %}
-              <video width="560" height="315" controls>
-                <source src="{{ post.video_file.url }}" type="video/mp4">
-              </video>        
-              <br>
-            {% endif %}
-            {% if post.video_website_address %}
-                Video URL: <a href = "{{post.video_website_address}}">{{post.video_website_address}}</a>
-            {% endif %}
-    
-          </li>
-        {% endfor %}
-      </ul>
+          {% endif %}
+          {% if post.video_website_address %}
+            Video URL: <a href="{{ post.video_website_address }}">{{ post.video_website_address }}</a>
+          {% endif %}
+          {% if post.ticket_course %}
+            </a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
 
   {% else %}
-      <h1>  You Searched for nothing</h1>
-
+    <h1>You Searched for nothing</h1>
   {% endif %}
 
-
 </div>
-  
 {% endblock %}
