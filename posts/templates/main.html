@@ -10,11 +10,10 @@
   <h1>  Educational Hub</h1>
 
   <div class="container">
-   {% if user.is_authenticated %}
+
+
     <p>Welcome, <strong>{{ user.username }}</strong>!</p>
-  {% else %}
-    <p>User is not authenticated.</p>
-  {% endif %}
+
   </div>
 
   <br/>
