@@ -1,20 +1,32 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User  # Corrected import
+<<<<<<< HEAD
 from .models import CoreSubject, Course, Ticket
+=======
+from .models import CoreSubject, Course, SugguestCourse
+>>>>>>> d0e447b9667076c181fd8f572a63ac51b21bf7db
 from django.shortcuts import render, get_object_or_404
 import random
 
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+<<<<<<< HEAD
+=======
+from .models import Ticket
+>>>>>>> d0e447b9667076c181fd8f572a63ac51b21bf7db
 
 from django.views.decorators.csrf import csrf_protect
 
 from django.http import HttpResponseRedirect
 
+<<<<<<< HEAD
 from .forms import TicketForm, SugguestCourseForm
 
 from django.contrib.auth.models import User
+=======
+from .forms import TicketForm, SugguestCourseForm
+>>>>>>> d0e447b9667076c181fd8f572a63ac51b21bf7db
 
 def users(request):
     myusers = User.objects.all().values()
@@ -126,6 +138,7 @@ def search_tickets(request):
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
+<<<<<<< HEAD
     
 def add_SugguestCourse(request):
     submitted = False
@@ -149,3 +162,5 @@ def add_SugguestCourse(request):
         'submitted': submitted,
     }
     return render(request, template, context)
+=======
+>>>>>>> d0e447b9667076c181fd8f572a63ac51b21bf7db

@@ -1,0 +1,59 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Ticket
+{% endblock %}
+
+{% block content %}
+<style>
+  /* Padding Above Container */
+  .container {
+    padding-top: 50px;
+  }
+  /* Post Details */
+  .post-details {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  /* Post Header */
+  .post-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom: 10px;
+  }
+  /* Post Content */
+  .post-content {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="container">
+  <div class="post-details">
+    <div class="post-header">
+      <h2>Title: {{ ticket.title }}</h2>
+    </div>
+    <div class="post-content">
+      <p>User: {{ ticket.user }}</p>
+      <p>Post Time: {{ ticket.time_of_post }}</p>
+      <p>Description: {{ ticket.post_description }}</p>
+      {% if ticket.pdf_file %}
+      <p>PDF File: <a href="{{ ticket.pdf_file.url }}">{{ ticket.pdf_file.name }}</a></p>
+      {% endif %}
+      {% if ticket.video_file %}
+      <p>Video File: <a href="{{ ticket.video_file.url }}">{{ ticket.video_file.name }}</a></p>
+      {% endif %}
+      {% if ticket.video_website_address %}
+      <p>Video URL: <a href="{{ post.video_website_address }}">{{ ticket.video_website_address }}</a></p>
+      {% endif %}
+      <p>Course Name: {{ course_name }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
