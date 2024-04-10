@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Ticket
+from .models import Ticket, SugguestCourse
 from django.utils import timezone
 
 class TicketForm(ModelForm):  # Corrected class name
@@ -37,5 +37,18 @@ class TicketForm(ModelForm):  # Corrected class name
                 instance.save()
             return instance
 
+class SugguestCourseForm(ModelForm):
+    class Meta:
+        model = SugguestCourse
 
-    
+        fields = ('suggestedCourse', 'suggestedCourseDescription')  # Corrected the typo in 'fields'
+
+        labels = {
+            'suggestedCourse': '',
+            'suggestedCourseDescription': '',
+        }
+
+        widgets = {
+            'suggestedCourse': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 600px; margin: auto;', 'placeholder': 'Input your suggested course'}),
+            'suggestedCourseDescription': forms.TextInput(attrs={'class': 'form-control', 'style': 'width: 600px; margin: auto;', 'placeholder': 'Input your suggested course description'}),
+        }

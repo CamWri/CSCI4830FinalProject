@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User  # Corrected import
-from .models import CoreSubject, Course
+from .models import CoreSubject, Course, SugguestCourse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from .models import Ticket
+
 import random
 
 
@@ -13,7 +14,7 @@ from django.views.decorators.csrf import csrf_protect
 
 from django.http import HttpResponseRedirect
 
-from .forms import TicketForm
+from .forms import TicketForm, SugguestCourseForm
 
 def users(request):
     myusers = User.objects.all().values()
@@ -126,3 +127,26 @@ def search_tickets(request):
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
 
+
+def add_SugguestCourse(request):
+    submitted = False
+    template = 'requestedCourse.html'
+
+    if request.method == "POST":
+        form = SugguestCourseForm(request.POST)
+        if form.is_valid():
+            requestedCourse = form.save(commit=False)
+
+            requestedCourse.save()
+
+            return HttpResponseRedirect('/add_post?submitted=True')
+    else:
+        form = SugguestCourseForm()
+        if 'submitted' in request.GET:
+            submitted = True
+
+    context = {
+        'form': form,
+        'submitted': submitted,
+    }
+    return render(request, template, context)
