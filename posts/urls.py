@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import account, delete_account
+
 
 urlpatterns = [
     path('', views.main, name = 'main'),
@@ -12,8 +14,8 @@ urlpatterns = [
     path('media/', views.courseDetails, name='course_details'),
     path('account/', views.account, name = "account" ),
     path('add_post/', views.add_post, name = "add_post"),
-    path('search_tickets/', views.search_tickets, name = "search_tickets"),
-    path('delete_account/', views.delete_account, name='delete_account')
+    path('delete_account/', delete_account, name='delete_account'),
+    path('search_tickets/', views.search_tickets, name = "search_tickets")
 
     #get rid of this lines 6 and 7 eventually because we don't want them to see all users
 

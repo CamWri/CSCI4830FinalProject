@@ -1,19 +1,19 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User  # Corrected import
-from .models import CoreSubject, Course
+from .models import CoreSubject, Course, SugguestCourse
 from django.shortcuts import render, get_object_or_404
+import random
+
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from .models import Ticket
-import random
-
 
 from django.views.decorators.csrf import csrf_protect
 
 from django.http import HttpResponseRedirect
 
-from .forms import TicketForm
+from .forms import TicketForm;
 
 def users(request):
     myusers = User.objects.all().values()
@@ -125,17 +125,3 @@ def search_tickets(request):
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
-
-
-def ticket(request, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    course_name = ticket.ticket_course
-    context = {
-        'ticket': ticket,
-        'course_name': course_name,
-    }
-    return render(request, 'ticket.html', context)
-
-
-
-
