@@ -80,7 +80,7 @@ def add_post(request):
     template = 'add_post.html'
 
     if request.method == "POST":
-        form = TicketForm(request.POST)
+        form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
             ticket = form.save(commit=False)
 
@@ -125,3 +125,12 @@ def search_tickets(request):
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
+
+def ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    course_name = ticket.ticket_course
+    context = {
+        'ticket': ticket,
+        'course_name': course_name,
+    }
+    return render(request, 'ticket.html', context)
