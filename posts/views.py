@@ -127,3 +127,35 @@ def search_tickets(request):
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
+
+def add_SugguestCourse(request):
+    submitted = False
+    template = 'requestedCourse.html'
+
+    if request.method == "POST":
+        form = SugguestCourseForm(request.POST)
+        if form.is_valid():
+            requestedCourse = form.save(commit=False)
+
+            requestedCourse.save()
+
+            return HttpResponseRedirect('/add_post?submitted=True')
+    else:
+        form = SugguestCourseForm()
+        if 'submitted' in request.GET:
+            submitted = True
+
+    context = {
+        'form': form,
+        'submitted': submitted,
+    }
+    return render(request, template, context)
+
+def ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    course_name = ticket.ticket_course
+    context = {
+        'ticket': ticket,
+        'course_name': course_name,
+    }
+    return render(request, 'ticket.html', context)
