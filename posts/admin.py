@@ -6,6 +6,7 @@ from .models import CoreSubject
 from .models import Course
 from .models import SugguestCourse
 
+
 class TicketAdmin(admin.ModelAdmin):
     list_display = ("user","title", "post_description",)
 

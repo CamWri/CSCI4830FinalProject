@@ -2,9 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegisterForm
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponse
+
+from django.template import loader
+import random
+
+from posts.models import CoreSubject, Ticket
+
 
 # Create your views here.
 def login_user(request):
@@ -33,18 +39,30 @@ def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            uname = form.cleaned_data['username']
-            form.save()
-            #get the new user info
-            user = User.objects.get(username=uname)
-            user.save()
-            login_url = reverse('login')
-            return redirect(login_url)
+            # Save the form and retrieve the saved user
+            user = form.save()
+            # Optionally, you can log in the user after registration
+            # authenticate user before login
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
 
-        return redirect("/")
+            # Redirect to the login page
+            ticketlist = Ticket.objects.all()
+            random_tickets = random.sample(list(ticketlist), min(len(ticketlist), 5)) # Select up to 5 random tickets
+            mysubjects = CoreSubject.objects.all().values()
+            template = loader.get_template('main.html')
+            context = {
+                'mysubjects': mysubjects,
+                'ticketlist': random_tickets,
+            }
+            return HttpResponse(template.render(context, request))
     else:
         form = RegisterForm()
 
     return render(request, "register.html", {"form": form})
+
 
 # branch created to merge with main
