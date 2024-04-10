@@ -31,3 +31,11 @@ class CoreSubject(models.Model):
 
     def __str__(self):
         return f" {self.subject}"
+    
+
+class SugguestCourse(models.Model):
+    suggestedCourse = models.CharField("Suggested Course", max_length=50)
+    suggestedCourseDescription = models.CharField("Suggested Course Description", max_length=200)
+
+    def __str__(self):
+        return f" {self.suggestedCourse}"
