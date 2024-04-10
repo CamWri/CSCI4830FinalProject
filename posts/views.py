@@ -1,20 +1,20 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User  # Corrected import
-from .models import CoreSubject, Course, SugguestCourse
+from .models import CoreSubject, Course, Ticket
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-from .models import Ticket
-
 import random
 
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 from django.views.decorators.csrf import csrf_protect
 
 from django.http import HttpResponseRedirect
 
 from .forms import TicketForm, SugguestCourseForm
+
+from django.contrib.auth.models import User
 
 def users(request):
     myusers = User.objects.all().values()
@@ -126,8 +126,7 @@ def search_tickets(request):
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
-
-
+    
 def add_SugguestCourse(request):
     submitted = False
     template = 'requestedCourse.html'

@@ -15,7 +15,8 @@ urlpatterns = [
     path('search_tickets/', views.search_tickets, name = "search_tickets"),
     path('account/', account, name='account'),
     path('delete_account/', delete_account, name='delete_account'),
-    path('requestedCourse/', views.add_SugguestCourse , name='requested_Course')
+    path('requestedCourse/', views.add_SugguestCourse , name='requested_Course'),
+
 
 
     #get rid of this lines 6 and 7 eventually because we don't want them to see all users

@@ -7,7 +7,6 @@
 {% block content %}
 <h2>Register</h2>
     <form method="POST" class="form-group">
-   {% csrf_token %}
     <!--    <label for="id_username">Username:</label><br>
         <input type="text" id="id_username" name="username" required><br>
 
@@ -25,7 +24,9 @@
 
         <label for="id_password2">Confirm Password:</label><br>
         <input type="password" id="id_password2" name="password2" required><br> -->
-    {{ form.as_p }}
+        {% csrf_token %}
+        
+        {{ form.as_p }}
    <button type="submit" class="btn btn-success">Register</button>
 
     </form>
