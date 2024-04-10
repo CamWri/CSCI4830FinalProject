@@ -159,3 +159,12 @@ def ticket(request, ticket_id):
         'course_name': course_name,
     }
     return render(request, 'ticket.html', context)
+
+def ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    course_name = ticket.ticket_course
+    context = {
+        'ticket': ticket,
+        'course_name': course_name,
+    }
+    return render(request, 'ticket.html', context)
