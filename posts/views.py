@@ -174,24 +174,3 @@ def ticket(request, ticket_id):
         'isAuthenticated': isAuthenticated,
     }
     return render(request, 'ticket.html', context)
-
-def account(request):
-    isAuthenticated = request.user.is_authenticated
-    # Check if the user is logged in
-    if request.user.is_authenticated:
-        # User is logged in, you can access account details
-        user = request.user
-        # Access user attributes to get account details
-        username = user.username
-        email = user.email
-        # You can access any other fields of the user model as needed
-
-        # Pass account details to the template
-        context = {
-            'username': username,
-            'email': email,
-            'isAuthenticated': isAuthenticated,
-            # Add more fields as needed
-        }
-        # Render the template with account details
-        return render(request, 'account.html', context)
