@@ -12,7 +12,6 @@ urlpatterns = [
     path('subjects/subjectDetails/<str:subject>/<str:course_name>/', views.courseDetails, name='course_details'),
     path('subjects/subjectDetails/<int:ticket_id>/', views.ticket, name='ticket'),
     path('media/', views.courseDetails, name='course_details'),
-    path('account/', views.account, name = "account" ),
     path('add_post/', views.add_post, name = "add_post"),
     path('search_tickets/', views.search_tickets, name = "search_tickets"),
     path('account/', account, name='account'),
