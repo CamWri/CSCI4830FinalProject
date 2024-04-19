@@ -25,6 +25,7 @@
           Post Time:{{ post.time_of_post }} <br>
           Title: {{ post.title }} <br>
           Description: {{ post.post_description }} <br>
+          </a>
           {% if post.pdf_file %}
             File: <a href="{{ post.pdf_file.url }}" download>{{ post.pdf_file.name }}</a><br>
           {% endif %}
@@ -38,7 +39,6 @@
             Video URL: <a href="{{ post.video_website_address }}">{{ post.video_website_address }}</a>
           {% endif %}
           {% if post.ticket_course %}
-            </a>
           {% endif %}
         </li>
       {% endfor %}
