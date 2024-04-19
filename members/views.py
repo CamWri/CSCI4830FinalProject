@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import RegisterForm
-#from django.contrib.auth.models import User
+
 from django.urls import reverse
 from django.http import HttpResponse
 
@@ -36,6 +36,7 @@ def logout_user(request):
     return render(request, 'logout.html', {'message' : "You were logged out."})
 
 def register(request):
+    isAuthenticated = request.user.is_authenticated
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -57,6 +58,7 @@ def register(request):
             context = {
                 'mysubjects': mysubjects,
                 'ticketlist': random_tickets,
+                'isAuthenticated' : isAuthenticated,
             }
             return HttpResponse(template.render(context, request))
     else:
@@ -64,5 +66,28 @@ def register(request):
 
     return render(request, "register.html", {"form": form})
 
+def account(request):
+    isAuthenticated = request.user.is_authenticated
+    # Check if the user is logged in
+    if request.user.is_authenticated:
+        # User is logged in, you can access account details
+        user = request.user
+        # Access user attributes to get account details
+        username = user.username
+        email = user.email
+        # You can access any other fields of the user model as needed
 
+        # Pass account details to the template
+        context = {
+            'username': username,
+            'email': email,
+            'isAuthenticated' : isAuthenticated,
+            # Add more fields as needed
+        }
+        # Render the template with account details
+        return render(request, 'account.html', context)
+    else:
+        # User is not logged in, you can handle this case as needed
+        # For example, redirect to login page
+        return HttpResponse("You are not logged in.")
 # branch created to merge with main

@@ -18,47 +18,57 @@ from .forms import TicketForm, SugguestCourseForm
 from django.contrib.auth.models import User
 
 def users(request):
+    isAuthenticated = request.user.is_authenticated
     myusers = User.objects.all().values()
     template = loader.get_template('all_users.html')
     context = {
         'myusers': myusers,
+        'isAuthenticated': isAuthenticated,
     }
     return HttpResponse(template.render(context, request))
 
 def userDetails(request, user_id):
+    isAuthenticated = request.user.is_authenticated
     user = get_object_or_404(User, pk=user_id)
     tickets = Ticket.objects.filter(user=user)
-    return render(request, 'user_details.html', {'user': user, 'tickets': tickets})
+    return render(request, 'user_details.html', {'user': user, 'tickets': tickets, 'isAuthenticated': isAuthenticated,})
 
 def subjectDetails(request, subject):
+    isAuthenticated = request.user.is_authenticated
     core_subject = CoreSubject.objects.get(subject=subject)
     courses = core_subject.courses.all()
     template = loader.get_template('subjects_details.html')
     context = {
         'subject': core_subject,
         'courses': courses,
+        'isAuthenticated': isAuthenticated,
     }
     return HttpResponse(template.render(context, request))
 
 def subjects(request):
+    isAuthenticated = request.user.is_authenticated
     mysubjects = CoreSubject.objects.all().values()
     template = loader.get_template('all_subjects.html')
     context = {
         'mysubjects': mysubjects,
+        'isAuthenticated': isAuthenticated,
     }
     return HttpResponse(template.render(context, request))
 
 def courseDetails(request, subject, course_name):
+    isAuthenticated = request.user.is_authenticated
     course = get_object_or_404(Course, course_name=course_name)
     ticket_list = course.all_tickets.all()
     template = loader.get_template('course.html')
     context = {
         'course': course,
         'ticket_list': ticket_list,
+        'isAuthenticated': isAuthenticated,
     }
     return HttpResponse(template.render(context, request))
 
 def main(request):
+    isAuthenticated = request.user.is_authenticated
     ticketlist = Ticket.objects.all()
     random_tickets = random.sample(list(ticketlist), min(len(ticketlist), 5)) # Select up to 5 random tickets
     mysubjects = CoreSubject.objects.all().values()
@@ -66,13 +76,10 @@ def main(request):
     context = {
         'mysubjects': mysubjects,
         'ticketlist': random_tickets,
+        'isAuthenticated': isAuthenticated,
     }
     return HttpResponse(template.render(context, request))
 
-
-def account(request):
-    template = loader.get_template('account.html')
-    return HttpResponse(template.render())
 
 def delete_account(request):
     return render('account')
@@ -80,6 +87,7 @@ def delete_account(request):
 def add_post(request):
     submitted = False
     template = 'add_post.html'
+    isAuthenticated = request.user.is_authenticated
 
     if request.method == "POST":
         form = TicketForm(request.POST, request.FILES)
@@ -105,6 +113,7 @@ def add_post(request):
     context = {
         'form': form,
         'submitted': submitted,
+        'isAuthenticated': isAuthenticated,
     }
     return render(request, template, context)
 
@@ -112,6 +121,7 @@ def add_post(request):
 @csrf_protect
 def search_tickets(request):
     template_name = 'search_tickets.html'  # Name of the template file
+    isAuthenticated = request.user.is_authenticated
 
     if request.method == "POST":
         search_query = request.POST.get('search_query', '')  # Safely get the search query
@@ -121,16 +131,18 @@ def search_tickets(request):
         context = {
             "search_query": search_query,
             "posts" : posts,
+            'isAuthenticated': isAuthenticated,
         }
 
         return render(request, template_name, context)
     else:
         context = {}  # If it's not a POST request, create an empty context
         return render(request, template_name, context)
-    
+
 def add_SugguestCourse(request):
     submitted = False
     template = 'requestedCourse.html'
+    isAuthenticated = request.user.is_authenticated
 
     if request.method == "POST":
         form = SugguestCourseForm(request.POST)
@@ -148,23 +160,17 @@ def add_SugguestCourse(request):
     context = {
         'form': form,
         'submitted': submitted,
+        'isAuthenticated': isAuthenticated,
     }
     return render(request, template, context)
 
 def ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     course_name = ticket.ticket_course
+    isAuthenticated = request.user.is_authenticated
     context = {
         'ticket': ticket,
         'course_name': course_name,
-    }
-    return render(request, 'ticket.html', context)
-
-def ticket(request, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    course_name = ticket.ticket_course
-    context = {
-        'ticket': ticket,
-        'course_name': course_name,
+        'isAuthenticated': isAuthenticated,
     }
     return render(request, 'ticket.html', context)
