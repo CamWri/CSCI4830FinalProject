@@ -102,6 +102,9 @@ def add_post(request):
 
             course_id = request.POST.get('ticket_course')
 
+            ticket.user = request.user
+            ticket.username = request.user.get_username()
+
             # Convert the course ID to a Course object
             course = Course.objects.get(pk=course_id)
 
