@@ -57,11 +57,17 @@ def subjects(request):
 
 def courseDetails(request, subject, course_name):
     isAuthenticated = request.user.is_authenticated
-    course = get_object_or_404(Course, course_name=course_name)
+    course = get_object_or_404(Course, course_name=course_name)  
+    core_subject = CoreSubject.objects.get(subject=subject)
+    courses = core_subject.courses.all()
+    mysubjects = CoreSubject.objects.all().values() 
     ticket_list = course.all_tickets.all()
     template = loader.get_template('course.html')
     context = {
+        'mysubjects': mysubjects,
+        'subject':core_subject,
         'course': course,
+        'courses': courses,
         'ticket_list': ticket_list,
         'isAuthenticated': isAuthenticated,
     }

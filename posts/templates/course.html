@@ -4,6 +4,41 @@
   {{ course.course_name }} Forum
 {% endblock %}
 
+
+
+{% block course %}
+
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown"> <!-- Added 'dropdown' class -->
+        <a class="nav-link dropdown-toggle" href="/subjects" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subjects</a> 
+       
+          
+         
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for x in courses %}
+              
+          
+              <a class="dropdown-item" href="/subjects/subjectDetails/{{subject.subject}}/{{x.course_name}}">{{x.course_name}}</a>
+            {% endfor %}
+          </div>
+         
+       
+        
+      </li>
+    </ul>
+  </div>
+
+
+ 
+  
+ 
+
+{% endblock %}
+
+
+
 {% block search %}
 <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'search_tickets' %}">
   {% csrf_token %}
