@@ -67,6 +67,8 @@
       color: #ffffff; /* Change the text color on hover */
     }
 
+    
+    
 </style>
 </head>
 <body>
@@ -78,9 +80,21 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown"> <!-- Added 'dropdown' class -->
-          <a class="nav-link dropdown-toggle" href="/subjects" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subjects</a> <!-- Added 'dropdown-toggle' class and data-toggle attributes -->
+          <a class="nav-link dropdown-toggle" href="/subjects" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subjects</a> 
+          <!-- Added 'dropdown-toggle' class and data-toggle attributes -->
+          
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <!-- Added 'dropdown-menu' class -->
             <a class="dropdown-item" href="/subjects">All Subjects</a>
+            <div class="dropdown">
+             
+            
+            
+           
+            
+            
+             
+          
+           
             <a class="dropdown-item" href="/subjects/subjectDetails/Math">Math</a>
             <a class="dropdown-item" href="/subjects/subjectDetails/Science">Science</a>
             <a class="dropdown-item" href="/subjects/subjectDetails/Reading">Reading</a>
@@ -117,6 +131,9 @@
           <a class="nav-link" href="/requestedCourse">Course Suggustion</a>
         </li>
         {% endif %}
+        {% block course %}
+           
+        {% endblock %}
 
         </ul>
         <!-- Search form -->
