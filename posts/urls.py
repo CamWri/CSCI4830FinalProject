@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import account, delete_account
+from .views import account, delete_account,account_post
 
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
     path('account/', account, name='account'),
     path('delete_account/', delete_account, name='delete_account'),
     path('requestedCourse/', views.add_SugguestCourse , name='requested_Course'),
+    path('account_post/', account_post, name='account_post'),
 
     #get rid of this lines 6 and 7 eventually because we don't want them to see all users
 

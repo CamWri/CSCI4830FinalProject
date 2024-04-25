@@ -86,15 +86,6 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <!-- Added 'dropdown-menu' class -->
             <a class="dropdown-item" href="/subjects">All Subjects</a>
             <div class="dropdown">
-             
-            
-            
-           
-            
-            
-             
-          
-           
             <a class="dropdown-item" href="/subjects/subjectDetails/Math">Math</a>
             <a class="dropdown-item" href="/subjects/subjectDetails/Science">Science</a>
             <a class="dropdown-item" href="/subjects/subjectDetails/Reading">Reading</a>
@@ -115,6 +106,12 @@
             {% if isAuthenticated %}
             <a class="dropdown-item" href="/account">Account Details</a>
             {% endif %}
+            {% if isAuthenticated %}
+            <a class="dropdown-item" href="/account_post">Account Post</a>
+            {% endif %}
+
+            
+
             {% if not isAuthenticated %}
             <a class="dropdown-item" href="/members/login">Login</a>
             {% endif %}
@@ -124,6 +121,8 @@
             {% if not isAuthenticated %}
             <a class="dropdown-item" href="/members/register">Sign up</a>
             {% endif %}
+
+            
           </div>
         </li>
         {% if isAuthenticated %}

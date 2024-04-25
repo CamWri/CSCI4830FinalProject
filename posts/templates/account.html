@@ -45,6 +45,9 @@
     margin-left: 10px;
   }
 
+
+  
+
 </style>
 
 <div class="container">
@@ -55,6 +58,7 @@
     <div class="account-info-details">
       <p><strong>User:</strong> {{user.get_username}}</p>
       <p><strong>Email:</strong> {{user.email }}</p>
+      
     </div>
 
     <form method="post" action="{% url 'delete_account' %}">
@@ -63,7 +67,12 @@
     </form>
   </div>
 </div>
+
 {% endblock %}
+
+
+
+
 
 
 

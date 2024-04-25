@@ -1,0 +1,66 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Account Posts
+{% endblock %}
+
+
+
+
+<style>
+    /* Ticket Display */
+    .ticket-item {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      padding: 0;
+      border-radius: 5px;
+    }
+    /* Ticket title */
+    .ticket-title {
+      background-color: #007bff;
+      color: white;
+      padding: 20px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      margin: -1px -1px 20px;
+    }
+    /* Ticket Title Anchor */
+    .ticket-title a {
+      color: white;
+    }
+    /* Ticket Details */
+    .ticket-details{
+      margin-left: 10px;
+    }
+  </style>
+
+
+
+
+{% block content %}
+  <div class = "forum">
+    <h1>Yours Posts </h1>
+
+    {% if user_posts %}
+    <ul>
+      {% for post in user_posts %}
+        <li>{{ post.title }}</li>
+        <li>{{ post.username }}</li>
+        <li>{{ post.time_of_post }}</li>
+        <li>{{ post.post_description }}</li>
+        <li>{{ post.video_website_address }}</li>
+        <li>{{ post.video_file }}</li>
+        <li>{{ post.ticket_course }}</li>
+       
+
+        
+        <!-- Display other post details as needed -->
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You haven't posted anything yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

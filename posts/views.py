@@ -181,6 +181,7 @@ def ticket(request, ticket_id):
     }
     return render(request, 'ticket.html', context)
 
+
 def account(request):
     isAuthenticated = request.user.is_authenticated
     # Check if the user is logged in
@@ -191,7 +192,7 @@ def account(request):
         username = user.username
         email = user.email
         # You can access any other fields of the user model as needed
-
+        #ticketlist = Ticket.objects.all()
         # Pass account details to the template
         context = {
             'username': username,
@@ -207,7 +208,10 @@ def account(request):
         return HttpResponse("You are not logged in.")
 # branch created to merge with main
 
-def account(request):
+
+
+
+def account_post(request):
     isAuthenticated = request.user.is_authenticated
     # Check if the user is logged in
     if request.user.is_authenticated:
@@ -217,18 +221,20 @@ def account(request):
         username = user.username
         email = user.email
         # You can access any other fields of the user model as needed
-
+        user_posts = Ticket.objects.all()
+        #ticketlist = Ticket.objects.all()
         # Pass account details to the template
         context = {
             'username': username,
             'email': email,
+            'user_posts': user_posts, #remove it 
             'isAuthenticated' : isAuthenticated,
             # Add more fields as needed
         }
         # Render the template with account details
-        return render(request, 'account.html', context)
+        return render(request, 'account_post.html', context)
     else:
         # User is not logged in, you can handle this case as needed
         # For example, redirect to login page
         return HttpResponse("You are not logged in.")
-# branch created to merge with main
+    
