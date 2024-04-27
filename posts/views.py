@@ -102,6 +102,8 @@ def add_post(request):
 
             course_id = request.POST.get('ticket_course')
 
+            ticket.user = request.user
+            ticket.username = request.user.get_username()
             # Convert the course ID to a Course object
             course = Course.objects.get(pk=course_id)
 
@@ -221,7 +223,7 @@ def account_post(request):
         username = user.username
         email = user.email
         # You can access any other fields of the user model as needed
-        user_posts = Ticket.objects.all()
+        user_posts = Ticket.objects.filter(username=user.username)
         #ticketlist = Ticket.objects.all()
         # Pass account details to the template
         context = {

@@ -45,13 +45,23 @@
     {% if user_posts %}
     <ul>
       {% for post in user_posts %}
-        <li>{{ post.title }}</li>
-        <li>{{ post.username }}</li>
-        <li>{{ post.time_of_post }}</li>
-        <li>{{ post.post_description }}</li>
-        <li>{{ post.video_website_address }}</li>
-        <li>{{ post.video_file }}</li>
-        <li>{{ post.ticket_course }}</li>
+        
+        <li><p>
+          User: {{ post.username }}
+          <br>
+          Post time: {{ post.time_of_post }}
+          <br>
+          Title: {{ post.title }}
+          <br>
+          Description: {{ post.post_description }}
+          <br>
+          Video URL: {{ post.video_website_address }}
+          <br>
+          Video File: {{ post.video_file }}
+          <br>
+
+
+        </li>
        
 
         
