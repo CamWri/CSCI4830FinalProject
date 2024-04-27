@@ -9,6 +9,7 @@ import random
 
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.contrib import messages
 
 from django.views.decorators.csrf import csrf_protect
 
@@ -88,7 +89,12 @@ def main(request):
 
 
 def delete_account(request):
-    return render('account')
+    if request.user.is_authenticated:
+        user = request.user
+        user.delete()
+        logout(request)
+        messages.success(request, "Your account has been successfully deleted.")
+        return redirect('main')
 
 def add_post(request):
     submitted = False
