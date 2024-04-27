@@ -4,11 +4,11 @@ from django.contrib.auth.models import User  # Corrected import
 
 from .models import CoreSubject, Course, SugguestCourse, Ticket
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 import random
 
 from django.contrib.auth import logout
-from django.shortcuts import redirect
+from django.contrib import messages
 
 from django.views.decorators.csrf import csrf_protect
 
@@ -57,10 +57,10 @@ def subjects(request):
 
 def courseDetails(request, subject, course_name):
     isAuthenticated = request.user.is_authenticated
-    course = get_object_or_404(Course, course_name=course_name)  
+    course = get_object_or_404(Course, course_name=course_name)
     core_subject = CoreSubject.objects.get(subject=subject)
     courses = core_subject.courses.all()
-    mysubjects = CoreSubject.objects.all().values() 
+    mysubjects = CoreSubject.objects.all().values()
     ticket_list = course.all_tickets.all()
     template = loader.get_template('course.html')
     context = {
@@ -86,9 +86,13 @@ def main(request):
     }
     return HttpResponse(template.render(context, request))
 
-
 def delete_account(request):
-    return render('account')
+    if request.user.is_authenticated:
+        user = request.user
+        user.delete()
+        logout(request)
+        messages.success(request, "Your account has been successfully deleted.")
+        return redirect('main')
 
 def add_post(request):
     submitted = False
