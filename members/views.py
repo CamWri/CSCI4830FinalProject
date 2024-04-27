@@ -36,7 +36,6 @@ def logout_user(request):
     return render(request, 'logout.html', {'message' : "You were logged out."})
 
 def register(request):
-    isAuthenticated = request.user.is_authenticated
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -51,6 +50,7 @@ def register(request):
                 login(request, user)
 
             # Redirect to the login page
+            isAuthenticated = request.user.is_authenticated
             ticketlist = Ticket.objects.all()
             random_tickets = random.sample(list(ticketlist), min(len(ticketlist), 5)) # Select up to 5 random tickets
             mysubjects = CoreSubject.objects.all().values()
