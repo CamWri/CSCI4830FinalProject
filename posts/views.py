@@ -254,4 +254,19 @@ def delete_post(request, ticket_id):
         ticket.delete()
     return redirect('account_post')  # Redirect to your posts view
 
+
+def update_post(request, ticket_id):
+    # Get the ticket object using the ticket_id
+    ticket = get_object_or_404(Ticket, pk=ticket_id)
+
+    if request.method == 'POST':
+        form = TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect('account_post')
+    else:
+        form = TicketForm(instance=ticket)
+
+    return render(request, 'update_post.html', {'form': form})
+
    

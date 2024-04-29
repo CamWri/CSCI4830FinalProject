@@ -68,6 +68,8 @@
             Video URL: <a href="{{ post.video_website_address }}">{{ post.video_website_address }}</a>
           {% endif %}
           <br>
+          <a href="{% url 'update_post' post.id %}" class="btn btn-primary">Update</a>
+
             <form action="{% url 'delete_post' post.id %}" method="post">
               {% csrf_token %}
               <button type="submit">Delete</button>

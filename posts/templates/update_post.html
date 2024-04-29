@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Update Post
+{% endblock %}
+
+{% block content %}
+<div class="main">
+  <h1>Update Your Post</h1>
+  <br/><br/><br/>
+
+
+  {% if submitted %}
+    Your Post was updated successfully
+  {% endif %}
+  
+  {% if not submitted %}
+    <form action="" method="POST" enctype="multipart/form-data">
+
+      {% csrf_token %}
+
+      {{ form.as_p }}  <!-- Corrected template syntax -->
+
+      <input type="submit" value="Submit" class="btn btn-secondary custom-btn">
+
+    </form>
+
+  {% endif %}
+
+
+</div>
+  
+{% endblock %}
