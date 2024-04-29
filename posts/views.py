@@ -245,4 +245,13 @@ def account_post(request):
         # User is not logged in, you can handle this case as needed
         # For example, redirect to login page
         return HttpResponse("You are not logged in.")
+
+def delete_post(request, ticket_id):
     
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    # Check if the current user is the owner of the post
+    if request.method == "POST":
+        ticket.delete()
+    return redirect('account_post')  # Redirect to your posts view
+
+   
