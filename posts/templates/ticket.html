@@ -43,16 +43,19 @@
       <p>User: {{ ticket.user }}</p>
       <p>Post Time: {{ ticket.time_of_post }}</p>
       <p>Description: {{ ticket.post_description }}</p>
+      <p>Course Name: {{ course_name }}</p>
       {% if ticket.pdf_file %}
       <p>PDF File: <a href="{{ ticket.pdf_file.url }}">{{ ticket.pdf_file.name }}</a></p>
       {% endif %}
       {% if ticket.video_file %}
-      <p>Video File: <a href="{{ ticket.video_file.url }}">{{ ticket.video_file.name }}</a></p>
+      <video width="560" height="315" controls>
+        <source src="{{ ticket.video_file.url }}" type="video/mp4">
+      </video>
+      <br>
       {% endif %}
       {% if ticket.video_website_address %}
-      <p>Video URL: <a href="{{ post.video_website_address }}">{{ ticket.video_website_address }}</a></p>
+      Video URL: <a href="{{ ticket.video_website_address }}">{{ post.video_website_address }}</a>
       {% endif %}
-      <p>Course Name: {{ course_name }}</p>
     </div>
   </div>
 </div>

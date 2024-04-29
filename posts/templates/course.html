@@ -55,6 +55,7 @@
   <ul>
     {% for ticket in ticket_list %}
       <li>
+        <a href="{% url 'ticket' ticket_id=ticket.id%}">
         User: {{ ticket.user }}
         <br>
         Post Time:{{ticket.time_of_post}}
@@ -63,6 +64,7 @@
         <br>
         Description: {{ ticket.post_description}}
         <br>
+        </a>
         {% if ticket.pdf_file %}
           File: <a href="{{ ticket.pdf_file.url }}" download>{{ ticket.pdf_file.name }}</a>
           <br>
