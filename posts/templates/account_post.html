@@ -40,7 +40,7 @@
 
 {% block content %}
   <div class = "forum">
-    <h1>Yours Posts </h1>
+    <h1>Your Posts </h1>
 
     {% if user_posts %}
     <ul>
@@ -55,14 +55,26 @@
           <br>
           Description: {{ post.post_description }}
           <br>
-          Video URL: {{ post.video_website_address }}
+          {% if post.pdf_file %}
+            File: <a href="{{ post.pdf_file.url }}" download>{{ post.pdf_file.name }}</a><br>
+          {% endif %}
+          {% if post.video_file %}
+            <video width="560" height="315" controls>
+              <source src="{{ post.video_file.url }}" type="video/mp4">
+            </video>
+            <br>
+          {% endif %}
+          {% if post.video_website_address %}
+            Video URL: <a href="{{ post.video_website_address }}">{{ post.video_website_address }}</a>
+          {% endif %}
           <br>
-          Video File: {{ post.video_file }}
-          <br>
-
-
+            <form action="{% url 'delete_post' post.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
+        
         </li>
-       
+        
 
         
         <!-- Display other post details as needed -->
