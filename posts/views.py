@@ -89,6 +89,7 @@ def main(request):
 def delete_account(request):
     if request.user.is_authenticated:
         user = request.user
+        Ticket.objects.filter(user=user).delete()
         user.delete()
         logout(request)
         messages.success(request, "Your account has been successfully deleted.")
