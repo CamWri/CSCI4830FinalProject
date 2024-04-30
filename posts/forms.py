@@ -37,6 +37,7 @@ class TicketForm(ModelForm):  # Corrected class name
                 instance.save()
             return instance
 
+
 class SugguestCourseForm(ModelForm):
     class Meta:
         model = SugguestCourse

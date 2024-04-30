@@ -260,9 +260,19 @@ def update_post(request, ticket_id):
     ticket = get_object_or_404(Ticket, pk=ticket_id)
 
     if request.method == 'POST':
-        form = TicketForm(request.POST, instance=ticket)
+        form = TicketForm(request.POST, request.FILES, instance=ticket)
         if form.is_valid():
-            form.save()
+            pdf_file = request.FILES.get('pdf_file') 
+            video_file = request.FILES.get('video_file') 
+            
+            ticket = form.save(commit=False)  # Get updated ticket object from form
+            if pdf_file:
+                ticket.pdf_file = pdf_file
+            if video_file:
+                ticket.video_file = video_file
+
+            ticket.save()
+            
             return redirect('account_post')
     else:
         form = TicketForm(instance=ticket)
