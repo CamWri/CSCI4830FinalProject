@@ -254,4 +254,30 @@ def delete_post(request, ticket_id):
         ticket.delete()
     return redirect('account_post')  # Redirect to your posts view
 
+
+def update_post(request, ticket_id):
+    # Get the ticket object using the ticket_id
+    ticket = get_object_or_404(Ticket, pk=ticket_id)
+
+    if request.method == 'POST':
+        form = TicketForm(request.POST, request.FILES, instance=ticket)
+        if form.is_valid():
+
+            pdf_file = request.FILES.get('pdf_file')
+            video_file = request.FILES.get('video_file')
+
+            ticket = form.save(commit=False) #Get uploaded ticket from form
+            if pdf_file:
+                ticket.pdf_file = pdf_file
+            if video_file:
+                ticket.video_file = video_file
+
+            ticket.save()
+
+            return redirect('account_post')
+    else:
+        form = TicketForm(instance=ticket)
+
+    return render(request, 'update_post.html', {'form': form})
+
    

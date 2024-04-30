@@ -18,7 +18,9 @@ urlpatterns = [
     path('delete_account/', delete_account, name='delete_account'),
     path('requestedCourse/', views.add_SugguestCourse , name='requested_Course'),
     path('account_post/', account_post, name='account_post'),
-    path('delete_post/<int:ticket_id>/', views.delete_post, name='delete_post')
+    path('delete_post/<int:ticket_id>/', views.delete_post, name='delete_post'),
+    path('update_post/<int:ticket_id>/', views.update_post, name='update_post'),
+
 
     #get rid of this lines 6 and 7 eventually because we don't want them to see all users
 
