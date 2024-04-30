@@ -259,24 +259,35 @@ def update_post(request, ticket_id):
     # Get the ticket object using the ticket_id
     ticket = get_object_or_404(Ticket, pk=ticket_id)
 
+    current_course = ticket.ticket_course
+
+    current_course.all_tickets.remove(ticket)
+
     if request.method == 'POST':
         form = TicketForm(request.POST, request.FILES, instance=ticket)
         if form.is_valid():
-            pdf_file = request.FILES.get('pdf_file') 
-            video_file = request.FILES.get('video_file') 
-            
-            ticket = form.save(commit=False)  # Get updated ticket object from form
+            pdf_file = request.FILES.get('pdf_file')
+            video_file = request.FILES.get('video_file')
+            course_id = request.POST.get('ticket_course')
+
+
             if pdf_file:
                 ticket.pdf_file = pdf_file
             if video_file:
                 ticket.video_file = video_file
 
+            new_course = Course.objects.get(pk=course_id)
+
+            ticket.ticket_course = new_course
+
             ticket.save()
-            
+
+            new_course.all_tickets.add(ticket)
+
+            form.save()
+
             return redirect('account_post')
     else:
         form = TicketForm(instance=ticket)
 
     return render(request, 'update_post.html', {'form': form})
-
-   
