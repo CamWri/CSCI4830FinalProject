@@ -32,6 +32,10 @@
     margin-left: 10px;
     margin-bottom: 10px;
   }
+
+  .post-content a{
+    color: #375BDC;
+  }
 </style>
 
 <div class="container">
@@ -54,7 +58,7 @@
       <br>
       {% endif %}
       {% if ticket.video_website_address %}
-      Video URL: <a href="{{ ticket.video_website_address }}">{{ post.video_website_address }}</a>
+      Video URL: <a href="{{ ticket.video_website_address }}">{{ ticket.video_website_address }}</a>
       {% endif %}
     </div>
   </div>
