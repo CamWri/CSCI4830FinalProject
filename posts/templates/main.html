@@ -26,11 +26,15 @@
   }
   /* Ticket Title Anchor */
   .ticket-title a {
-    color: #375BDC;
+    color: white;
   }
   /* Ticket Details */
   .ticket-details{
     margin-left: 10px;
+  }
+
+  .ticket-details a{
+    color: #375BDC;
   }
 </style>
 
@@ -42,7 +46,6 @@
 
     </div>
   </div>
-
   <h2 class="text-center mt-5">Discover</h2>
 
   {% for ticket in ticketlist %}
@@ -77,5 +80,5 @@
   
 {% endblock %}
 
-
+</div>
 
