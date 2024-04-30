@@ -262,6 +262,7 @@ def update_post(request, ticket_id):
     current_course = ticket.ticket_course
 
     current_course.all_tickets.remove(ticket)
+    isAuthenticated = request.user.is_authenticated
 
     if request.method == 'POST':
         form = TicketForm(request.POST, request.FILES, instance=ticket)
@@ -290,4 +291,6 @@ def update_post(request, ticket_id):
     else:
         form = TicketForm(instance=ticket)
 
-    return render(request, 'update_post.html', {'form': form})
+    context = {'isAuthenticated': isAuthenticated, 'form': form}
+
+    return render(request, 'update_post.html', context)
